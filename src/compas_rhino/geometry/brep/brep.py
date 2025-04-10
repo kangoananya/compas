@@ -269,6 +269,34 @@ class RhinoBrep(Brep):
         return [RhinoBrep.from_native(brep) for brep in resulting_breps]
 
     @classmethod
+    def from_boolean_split(cls, breps_a, breps_b):
+        """
+        Construct a Brep from the boolean split of two groups of Breps.
+        Parameters
+        ----------
+        breps_a : :class:`compas_rhino.geometry.RhinoBrep` or list(:class:`compas_rhino.geometry.RhinoBrep`)
+            Brep to split.
+        breps_b : :class:`compas_rhino.geometry.RhinoBrep` or list(:class:`compas_rhino.geometry.RhinoBrep`)
+            The cutting brep.
+
+        Returns
+        -------
+        list(:class:`compas_rhino.geometry.RhinoBrep`)
+            list of one or more resulting Breps.
+
+        """
+        if not isinstance(breps_a, list):
+            breps_a = [breps_a]
+        if not isinstance(breps_b, list):
+            breps_b = [breps_b]
+        resulting_breps = Rhino.Geometry.Brep.CreateBooleanSplit(
+            [b.native_brep for b in breps_a],
+            [b.native_brep for b in breps_b],
+            TOL.absolute,
+        )
+        return [RhinoBrep.from_native(brep) for brep in resulting_breps]
+
+    @classmethod
     def from_box(cls, box):
         """Create a RhinoBrep from a box.
 

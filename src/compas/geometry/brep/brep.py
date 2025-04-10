@@ -2,6 +2,7 @@ from compas.geometry import Geometry
 
 from . import from_boolean_difference
 from . import from_boolean_intersection
+from . import from_boolean_split
 from . import from_boolean_union
 from . import from_box
 from . import from_brepfaces
@@ -652,6 +653,22 @@ class Brep(Geometry):
 
         """
         return from_boolean_union(brep_a, brep_b)
+
+    @classmethod
+    def from_boolean_split(cls, brep_a, brep_b):
+        """Construct a Brep from the boolean split of two other Breps.
+
+        Parameters
+        ----------
+        brep_a : :class:`compas.geometry.Brep`
+        brep_b : :class:`compas.geometry.Brep`
+
+        Returns
+        -------
+        :class:`compas.geometry.Brep`
+
+        """
+        return from_boolean_split(brep_a, brep_b)
 
     def __sub__(self, other):
         """Compute the boolean difference using the "-" operator of this shape and another.

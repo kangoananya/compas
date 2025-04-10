@@ -19,6 +19,10 @@ def from_boolean_intersection(*args, **kwargs):
 def from_boolean_union(*args, **kwargs):
     return RhinoBrep.from_boolean_union(*args, **kwargs)
 
+@plugin(category="factories", requires=["Rhino"])
+def from_boolean_split(*args, **kwargs):
+    return RhinoBrep.from_boolean_split(*args, **kwargs)
+
 
 @plugin(category="factories", requires=["Rhino"])
 def from_box(*args, **kwargs):

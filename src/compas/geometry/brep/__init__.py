@@ -11,6 +11,10 @@ def from_box(*args, **kwargs):
 def from_boolean_difference(*args, **kwargs):
     raise PluginNotInstalledError
 
+@pluggable(category="factories")
+def from_boolean_split(*args, **kwargs):
+    raise PluginNotInstalledError
+
 
 @pluggable(category="factories")
 def from_boolean_intersection(*args, **kwargs):
